@@ -20,7 +20,9 @@ RUN apt-get update \
         sudo sudo-rs man-db manpages less nano vim-tiny tree file \
         curl wget ca-certificates iproute2 iputils-ping dnsutils \
         psmisc procps cron jq zip unzip bash-completion tzdata \
-    && rm -rf /var/lib/apt/lists/*
+        command-not-found python3
+# apt の一覧は消さない（command-not-found の案内に使う。WSL で apt update した後と同じ状態）
+RUN apt-get update
 
 # ubuntu ユーザーにパスワードを付け、sudo のときに聞かれるようにする
 RUN echo 'ubuntu:ubuntu' | chpasswd
