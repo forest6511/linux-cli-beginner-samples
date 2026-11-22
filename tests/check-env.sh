@@ -5,12 +5,12 @@ fail=0
 
 # check 説明 期待する値 実際の値
 check() {
-	if [ "$2" = "$3" ]; then
-		printf 'ok   %s\n' "$1"
-	else
-		printf 'NG   %s（期待: %s／実際: %s）\n' "$1" "$2" "$3"
-		fail=1
-	fi
+  if [ "$2" = "$3" ]; then
+    printf 'ok   %s\n' "$1"
+  else
+    printf 'NG   %s（期待: %s／実際: %s）\n' "$1" "$2" "$3"
+    fail=1
+  fi
 }
 
 # 1. ユーザーとホーム
@@ -33,12 +33,12 @@ check "man ls が読める" yes "$man_ok"
 # 5. 本で扱うコマンドがすべて使える
 missing=0
 while read -r chapter name; do
-	case "$chapter" in '#'* | '') continue ;; esac
-	if ! type "$name" >/dev/null 2>&1; then
-		printf 'NG   コマンド %s（%s）が無い\n' "$name" "$chapter"
-		missing=$((missing + 1))
-		fail=1
-	fi
+  case "$chapter" in '#'* | '') continue ;; esac
+  if ! type "$name" >/dev/null 2>&1; then
+    printf 'NG   コマンド %s（%s）が無い\n' "$name" "$chapter"
+    missing=$((missing + 1))
+    fail=1
+  fi
 done <"${1:-/tests/commands.txt}"
 check "本のコマンドがそろっている（足りない数）" 0 "$missing"
 

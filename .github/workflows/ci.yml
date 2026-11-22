@@ -15,7 +15,9 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+      - name: 本に載せるファイルの行幅（69 桁まで）
+        run: python3 tests/check-width.py
       - name: shellcheck
         shell: bash
         run: |
@@ -39,7 +41,7 @@ jobs:
   env:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: 学習環境を作って中で確かめる
         shell: bash
         run: bash tests/run.sh
