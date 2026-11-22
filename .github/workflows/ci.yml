@@ -1,0 +1,45 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 0 * * 1" # 毎週月曜 9:00（日本時間）。ubuntu:26.04 の更新で結果が変わっていないかを見る
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: shellcheck
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(git ls-files '*.sh')
+          shellcheck "${files[@]}"
+      - name: shfmt
+        shell: bash
+        run: |
+          set -euo pipefail
+          go install mvdan.cc/sh/v3/cmd/shfmt@v3.14.1
+          mapfile -t files < <(git ls-files '*.sh')
+          "$(go env GOPATH)/bin/shfmt" -d "${files[@]}"
+      - name: actionlint
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash <(curl -sSfL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.7/scripts/download-actionlint.bash) 1.7.7
+          ./actionlint .github/workflows/*.yml
+
+  env:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 学習環境を作って中で確かめる
+        shell: bash
+        run: bash tests/run.sh
