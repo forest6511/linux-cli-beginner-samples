@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
-  schedule:
-    - cron: "0 0 * * 1" # 毎週月曜 9:00（日本時間）。ubuntu:26.04 の更新で結果が変わっていないかを見る
+  # 定期実行はしない（次の改訂まで直さないため。2026-11-23）。
+  # 改訂を始めるときや、読者から動かないと連絡があったときは、Actions の画面から手で実行する
   workflow_dispatch:
 
 permissions:
