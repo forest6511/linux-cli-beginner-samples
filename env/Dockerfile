@@ -21,7 +21,7 @@ RUN apt-get update \
         sudo sudo-rs man-db manpages less nano vim-tiny tree file \
         curl wget ca-certificates iproute2 iputils-ping dnsutils \
         psmisc procps cron jq zip unzip bash-completion tzdata \
-        command-not-found python3 whiptail
+        command-not-found python3 whiptail gawk
 # apt の一覧は消さない（command-not-found の案内に使う。WSL で apt update した後と同じ状態）
 RUN apt-get update
 
@@ -32,6 +32,7 @@ USER ubuntu
 WORKDIR /home/ubuntu
 # WSL でログインしたときと同じ環境変数にそろえる（Docker では空になる）
 # PATH は WSL の /etc/environment と同じ（Docker はログインのしくみを通らないので /etc/environment を読まない）。
+# gawk は、WSL の Ubuntu で awk になっているもの（Docker の ubuntu:26.04 は mawk だけで、エラーの文言などが違う）。
 # whiptail は、apt で入れるときの設定の画面に使う（無いと debconf の警告が何行も出る。WSL には入っている）
 ENV USER=ubuntu \
     SHELL=/bin/bash \
