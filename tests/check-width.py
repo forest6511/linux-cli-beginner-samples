@@ -8,6 +8,8 @@ LIMIT = 69
 files = subprocess.run(["git", "ls-files", "ch*/*", "practice/*"], capture_output=True, text=True).stdout.split()
 bad = 0
 for f in sorted(set(files)):
+    if f.endswith("README.md"):
+        continue  # 章の説明のページは本に載らない（紙面の幅とは関係ない）
     try:
         text = open(f, encoding="utf-8").read()
     except UnicodeDecodeError:
