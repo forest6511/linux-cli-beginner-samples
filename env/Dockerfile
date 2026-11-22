@@ -5,8 +5,9 @@
 #   - 最小イメージで省かれている man ページを戻している
 FROM ubuntu:26.04
 
-ENV DEBIAN_FRONTEND=noninteractive \
-    TZ=Asia/Tokyo
+# ビルドのときだけ質問を出さない（ENV にすると読者のシェルにも残り、WSL と変わる）
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Tokyo
 
 # 省かれている man ページなどを戻す
 RUN apt-get update \
@@ -20,7 +21,7 @@ RUN apt-get update \
         sudo sudo-rs man-db manpages less nano vim-tiny tree file \
         curl wget ca-certificates iproute2 iputils-ping dnsutils \
         psmisc procps cron jq zip unzip bash-completion tzdata \
-        command-not-found python3
+        command-not-found python3 whiptail
 # apt の一覧は消さない（command-not-found の案内に使う。WSL で apt update した後と同じ状態）
 RUN apt-get update
 
@@ -30,7 +31,10 @@ RUN echo 'ubuntu:ubuntu' | chpasswd
 USER ubuntu
 WORKDIR /home/ubuntu
 # WSL でログインしたときと同じ環境変数にそろえる（Docker では空になる）
+# PATH は WSL の /etc/environment と同じ（Docker はログインのしくみを通らないので /etc/environment を読まない）。
+# whiptail は、apt で入れるときの設定の画面に使う（無いと debconf の警告が何行も出る。WSL には入っている）
 ENV USER=ubuntu \
     SHELL=/bin/bash \
-    LANG=C.UTF-8
+    LANG=C.UTF-8 \
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 CMD ["bash", "-l"]

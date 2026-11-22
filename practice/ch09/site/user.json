@@ -1,0 +1,6 @@
+{
+  "name": "sato",
+  "dept": "sales",
+  "skills": ["linux", "git", "python"],
+  "office": {"city": "tokyo", "floor": 5}
+}
