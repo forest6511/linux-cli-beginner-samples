@@ -1,0 +1,5 @@
+sato 72
+suzuki 95
+takahashi 8
+tanaka 100
+ito 64

@@ -1,0 +1,5 @@
+Error: disk is full
+info: backup started
+ERROR: network is down
+info: backup finished
+warning: memory is low
