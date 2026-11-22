@@ -1,2 +1,5 @@
 * text=auto eol=lf
 *.sh text eol=lf
+# 章のフォルダーの説明のページは、配布の ZIP（git archive）に入れない。
+# 読者が cp -r で練習用のフォルダーを写したとき、本に載せた ls の表示と食い違うため
+practice/*/README.md export-ignore
