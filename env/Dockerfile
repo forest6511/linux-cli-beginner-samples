@@ -27,4 +27,8 @@ RUN echo 'ubuntu:ubuntu' | chpasswd
 
 USER ubuntu
 WORKDIR /home/ubuntu
+# WSL でログインしたときと同じ環境変数にそろえる（Docker では空になる）
+ENV USER=ubuntu \
+    SHELL=/bin/bash \
+    LANG=C.UTF-8
 CMD ["bash", "-l"]
