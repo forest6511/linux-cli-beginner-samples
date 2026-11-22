@@ -57,6 +57,7 @@ fi
 
 # #region usage
 # どれにも当てはまらないときは、使い方を出して終わる
-echo "使い方: memo add 内容 分 | list | search 言葉 | count | sum [日付]" >&2
+echo "使い方: memo add 内容 分" >&2
+echo "        memo list | search 言葉 | count | sum [日付]" >&2
 exit 1
 # #endregion
