@@ -8,7 +8,7 @@
 
 ## 取り込み方
 
-本の第1章の手順で、Ubuntu の中に取り込みます。
+本の第1章の手順で、Ubuntu の中に取り込みます。**先に学習環境（Ubuntu）を用意し、その中で打ちます。** Mac の人は[学習環境の作り方](env)（Docker Desktop を入れるところから）、Windows の人は本の第1章の手順で WSL に Ubuntu 26.04 を入れます。行の頭が `ubuntu@study:~$` のように `$` で終わる形（Windows では `自分のユーザー名@コンピューター名:~$` のような形。`:` の後ろは今いる場所で、`~` 以外になることもあります）になってから、次を打ちます。
 
 ```bash
 mkdir -p ~/linux-study
@@ -40,7 +40,7 @@ ls samples
 
 ## 学習環境（Mac）
 
-本の第1章の手順で作ります。
+本の第1章の手順で作ります。先に Docker Desktop を入れ、Mac の「ターミナル」で打ちます。Docker Desktop の入れ方から順に、[学習環境の作り方](env)のページにまとめています。
 
 ```bash
 url=https://github.com/forest6511/linux-cli-beginner-samples
