@@ -1,0 +1,6 @@
+
+# 誤ってシークレットを入れないため（この repo では使わない）
+*.tfstate
+.terraform/
+*.tfvars
+.env
